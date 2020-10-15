@@ -20,12 +20,15 @@ jobs:
     name: "howdy"
     steps:
       - run: |
-          which -a go
+          go env -w GOROOT="$GOROOT_1_15_X64"
+          which go
           go version
-          ls -al /usr/bin/go
-          ls -al /bin/go
-          env
-          go env
+#          which -a go
+#          go version
+#          ls -al /usr/bin/go
+#          ls -al /bin/go
+#          env
+#          go env
 #          echo AGENT_TOOLSDIRECTORY=$AGENT_TOOLSDIRECTORY
 #          du -h $AGENT_TOOLSDIRECTORY/go
 #          ls -haltr $AGENT_TOOLSDIRECTORY/go
