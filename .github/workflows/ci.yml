@@ -6,13 +6,10 @@ jobs:
     steps:
       - uses: actions/setup-go@v2
         with:
-          go-version: '~1.14.0'
+          go-version: '~1.15.0'
       - run: go version
   new:
-    env:
-      ACTION_REF: master
     runs-on: ubuntu-20.04
-    name: "howdy"
     steps:
       - name: setup go
         run: |
