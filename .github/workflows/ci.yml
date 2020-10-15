@@ -19,7 +19,10 @@ jobs:
     runs-on: ubuntu-20.04
     name: "howdy"
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/helloworld
-        with:
-          cache-prefix: mycache
+      - run: |
+          echo AGENT_TOOLSDIRECTORY=$AGENT_TOOLSDIRECTORY
+          ls -haltr $AGENT_TOOLSDIRECTORY
+#      - uses: actions/checkout@v2
+#      - uses: ./.github/actions/helloworld
+#        with:
+#          cache-prefix: mycache
