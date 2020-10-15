@@ -1,29 +1,32 @@
 name: ci
-on: [push, pull_request]
+on: [ push, pull_request ]
 jobs:
-#  cibuild:
-#    if: ${{ ! ( github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork != true ) }}
-#    name: cibuild
-#    runs-on: ubuntu-18.04
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: actions/setup-go@v2
-#        with:
-#          go-version: '~1.14.0'
-#      - run: script/generate --check
-#      - run: script/test
-#      - run: script/lint
+  #  cibuild:
+  #    if: ${{ ! ( github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork != true ) }}
+  #    name: cibuild
+  #    runs-on: ubuntu-18.04
+  #    steps:
+  #      - uses: actions/checkout@v2
+  #      - uses: actions/setup-go@v2
+  #        with:
+  #          go-version: '~1.14.0'
+  #      - run: script/generate --check
+  #      - run: script/test
+  #      - run: script/lint
   howdy:
     env:
       ACTION_REF: master
-      GOROOT:
     runs-on: ubuntu-20.04
     name: "howdy"
     steps:
-      - run: |
+      - name: setup go
+        run: |
+          export GOROOT=""
           go env -w GOROOT="$GOROOT_1_15_X64"
-          which go
-          go version
+          export PATH="$(go env GOROOT)/bin:$PATH"
+          echo "PATH=$PATH" >> $GITHUB_ENV
+      - name: go verion
+        run: go version
 #          which -a go
 #          go version
 #          ls -al /usr/bin/go
