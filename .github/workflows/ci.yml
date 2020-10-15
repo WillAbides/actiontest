@@ -16,4 +16,6 @@ jobs:
           echo "PATH=$GOROOT_1_15_X64/bin:$PATH" >> $GITHUB_ENV
           echo "GOROOT=$GOROOT_1_15_X64" >> $GITHUB_ENV
       - name: go verion
-        run: go version
+        run: |
+          go version
+          go env
