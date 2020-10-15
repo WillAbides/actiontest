@@ -14,7 +14,9 @@ jobs:
 #      - run: script/test
 #      - run: script/lint
   howdy:
+    env:
+      ACTION_REF: master
     runs-on: ubuntu-20.04
     name: "howdy"
     steps:
-      - uses: WillAbides/actiontest/actions/helloworld@master
+      - uses: WillAbides/actiontest/actions/helloworld@${{ env.ACTION_REF }}
