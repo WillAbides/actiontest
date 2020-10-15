@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: docker pull debian:9
+      - run: docker pull centos:7
       - name: setup go
         run: |
           echo "PATH=$GOROOT_1_15_X64/bin:$PATH" >> $GITHUB_ENV
