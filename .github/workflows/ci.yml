@@ -20,9 +20,10 @@ jobs:
     name: "howdy"
     steps:
       - run: |
-          echo AGENT_TOOLSDIRECTORY=$AGENT_TOOLSDIRECTORY
-          du -h $AGENT_TOOLSDIRECTORY/go
-          ls -haltr $AGENT_TOOLSDIRECTORY/go
+          which -a go
+#          echo AGENT_TOOLSDIRECTORY=$AGENT_TOOLSDIRECTORY
+#          du -h $AGENT_TOOLSDIRECTORY/go
+#          ls -haltr $AGENT_TOOLSDIRECTORY/go
 #      - uses: actions/checkout@v2
 #      - uses: ./.github/actions/helloworld
 #        with:
