@@ -1,5 +1,9 @@
 name: 'Hello World'
 description: 'Greet someone'
+inputs:
+  cache-prefix:
+    description: prefix for cache indices
+    required: true
 runs:
   using: "composite"
   steps:
@@ -7,6 +11,4 @@ runs:
       shell: sh
     - name: Dump job context
       shell: sh
-      env:
-        JOB_CONTEXT: ${{ toJson(job) }}
-      run: echo "$JOB_CONTEXT"
+      run: echo cache-prefix:${{ inputs.cache-prefix }}
