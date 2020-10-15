@@ -13,3 +13,8 @@ jobs:
       - run: script/generate --check
       - run: script/test
       - run: script/lint
+  howdy:
+    runs-on: ubuntu-20.04
+    name: "howdy"
+    steps:
+      - uses: WillAbides/actiontest
