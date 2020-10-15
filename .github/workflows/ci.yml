@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: docker images
-      - run: docker pull debian:9
-      - run: docker pull centos:7
+      - run: docker pull elasticsearch:7.1.0
+      - run: docker pull percona:5.7.21
       - name: setup go
         run: |
           echo "PATH=$GOROOT_1_15_X64/bin:$PATH" >> $GITHUB_ENV
