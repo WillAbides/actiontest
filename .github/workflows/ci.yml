@@ -16,6 +16,7 @@ jobs:
   howdy:
     env:
       ACTION_REF: master
+      GOROOT:
     runs-on: ubuntu-20.04
     name: "howdy"
     steps:
