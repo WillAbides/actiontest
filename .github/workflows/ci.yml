@@ -1,6 +1,14 @@
 name: ci
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 jobs:
+  logger:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: log something
+        run: |
+          echo ::warning::this is a warning
+          echo ::error::this is an error
+          echo ::info::this is some info 
   old:
     runs-on: ubuntu-20.04
     steps:
