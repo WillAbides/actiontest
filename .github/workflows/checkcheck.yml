@@ -1,6 +1,11 @@
 name: checkcheck
 on: [ push, pull_request, workflow_dispatch ]
 jobs:
+  something-else:
+    name: something else
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo hi
   check-it:
     name: check-it-name
     runs-on: ubuntu-20.04
