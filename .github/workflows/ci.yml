@@ -1,6 +1,18 @@
 name: ci
 on: [push, pull_request, workflow_dispatch]
 jobs:
+  prcheck:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: get the check run id for each job
+        run: |
+          CHECK_SUITE_URL=$(curl -s -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r '.check_suite_url')
+          CHECK_RUN_ID=$(curl -s -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.antiope-preview+json" $CHECK_SUITE_URL/check-runs | jq '.check_runs[] | select(.name=="prcheck") | .id ')
+          echo $CHECK_RUN_ID
   logger:
     runs-on: ubuntu-20.04
     steps:
