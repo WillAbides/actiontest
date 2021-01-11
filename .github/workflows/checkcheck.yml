@@ -10,6 +10,8 @@ jobs:
     name: check-it-name
     runs-on: ubuntu-20.04
     steps:
+      - name: dump env
+        run: env
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
