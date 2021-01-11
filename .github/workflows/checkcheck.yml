@@ -2,6 +2,7 @@ name: checkcheck
 on: [ push, pull_request, workflow_dispatch ]
 jobs:
   check-it:
+    name: check-it-name
     runs-on: ubuntu-20.04
     steps:
       - name: Dump GitHub context
