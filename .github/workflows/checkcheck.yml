@@ -9,7 +9,12 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - name: get run stuff
+      - name: get run
+        run: |
+          curl -s \
+            -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq .
+      - name: get jobs
         run: |
           curl -s \
             -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
