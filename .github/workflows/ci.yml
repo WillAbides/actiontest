@@ -1,53 +1,9 @@
 name: ci
 on: [push, pull_request, workflow_dispatch]
 jobs:
-  prcheck:
+  authcheck:
     runs-on: ubuntu-20.04
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: get run stuff
-        run: |
-          curl -s \
-            -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq .
-      - name: get the check run id for each job
-        run: |
-          CHECK_SUITE_URL=$(curl -s -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r '.check_suite_url')
-          CHECK_RUN_ID=$(curl -s -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.antiope-preview+json" $CHECK_SUITE_URL/check-runs | jq '.check_runs[] | select(.name=="prcheck") | .id ')
-          echo $CHECK_RUN_ID
-          curl -s \
-            -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.antiope-preview+json" \
-            $CHECK_SUITE_URL/check-runs | jq .
-  logger:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: log something
-        run: |
-          echo ::warning::this is a warning
-          echo ::error::this is an error
-          echo ::info::this is some info 
-  old:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/setup-go@v2
-        with:
-          go-version: '~1.15'
-      - name: go verion
-        run: |
-          go version
-          go env
-  new:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: setup go
-        run: |
-          echo "PATH=$GOROOT_1_15_X64/bin:$PATH" >> $GITHUB_ENV
-          echo "GOROOT=$GOROOT_1_15_X64" >> $GITHUB_ENV
-      - name: go verion
-        run: |
-          go version
-          go env
+      - run: git config -l
+      - uses: actions/checkout@v2
+      - run: git config -l
