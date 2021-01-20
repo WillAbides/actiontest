@@ -22,12 +22,15 @@ jobs:
   dl:
     runs-on: ubuntu-20.04
     steps:
+      - run: |
+          ls -haltr /opt/hostedtoolcache/go
       - name: setup go
         env:
           goversion: 1.14.7
         run: |
+          set -x
           go get golang.org/dl/go$goversion
-          go$goversion download
+#          go$goversion download
   new:
     runs-on: ubuntu-20.04
     steps:
