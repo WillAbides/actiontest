@@ -14,11 +14,15 @@ jobs:
     steps:
       - uses: actions/setup-go@v2
         with:
-          go-version: '~1.14'
-      - name: go verion
+          go-version: '1.15.5'
+      - name: go version
         run: |
+          set -x
           go version
           go env
+          which go
+          echo $PATH
+          which go
   dl:
     runs-on: ubuntu-20.04
     steps:
@@ -26,10 +30,12 @@ jobs:
           ls -haltr /opt/hostedtoolcache/go
       - name: setup go
         env:
-          goversion: 1.14.7
+          goversion: 1.15.5
         run: |
           set -x
           go get golang.org/dl/go$goversion
+          echo $PATH
+          which go
 #          go$goversion download
   new:
     runs-on: ubuntu-20.04
