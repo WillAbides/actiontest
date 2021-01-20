@@ -1,20 +1,20 @@
 name: ci
 on: [push, pull_request, workflow_dispatch]
 jobs:
-#  old:
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - uses: actions/setup-go@v2
-#        with:
-#          go-version: '1.15.2'
-#      - name: go version
-#        run: |
-#          set -x
-#          go version
-#          go env
-#          which go
-#          echo $PATH
-#          which go
+  old:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '1.15.2'
+      - name: go version
+        run: |
+          set -x
+          go version
+          go env
+          which go
+          echo $PATH
+          which go
   set-go:
     runs-on: ubuntu-20.04
     steps:
