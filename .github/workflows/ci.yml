@@ -24,7 +24,7 @@ jobs:
       - name: setup go
         env:
           GO_VERSION: 1.15.2
-        run: src/set-go.sh
+        run: src/set-go
 
 #          go$goversion download
 #  new:
