@@ -1,20 +1,12 @@
 name: ci
 on: [push, pull_request, workflow_dispatch]
 jobs:
-  logger:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: log something
-        run: |
-          echo ::warning::this is a warning
-          echo ::error::this is an error
-          echo ::info::this is some info 
   old:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/setup-go@v2
         with:
-          go-version: '1.15.5'
+          go-version: '1.15.2'
       - name: go version
         run: |
           set -x
@@ -30,7 +22,7 @@ jobs:
           ls -haltr /opt/hostedtoolcache/go
       - name: setup go
         env:
-          goversion: 1.15.5
+          goversion: 1.15.2
         run: |
           set -x
           go get golang.org/dl/go$goversion
