@@ -58,7 +58,7 @@ jobs:
 #          echo 'GOMOD=${{steps.setup-go.outputs.GOMOD}}'
       - run: go env
       - env:
-          outs: ${{ toJson(steps.setgo.outputs.GOCACHE) }}
+          outs: ${{ toJson(steps.setgo.outputs) }}
         run: echo $outs
 
 #          go$goversion download

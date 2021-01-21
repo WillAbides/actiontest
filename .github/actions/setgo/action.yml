@@ -11,6 +11,18 @@ outputs:
   GOCACHE:
     description: go env GOCACHE
     value: ${{ steps.install-go.outputs.GOCACHE }}
+  GOMODCACHE:
+    description: go env GOMODCACHE
+    value: ${{ steps.install-go.outputs.GOMODCACHE }}
+  GOPATH:
+    description: go env GOPATH
+    value: ${{ steps.install-go.outputs.GOPATH }}
+  GOROOT:
+    description: go env GOROOT
+    value: ${{ steps.install-go.outputs.GOROOT }}
+  GOTOOLDIR:
+    description: go env GOTOOLDIR
+    value: ${{ steps.install-go.outputs.GOTOOLDIR }}
 runs:
   using: composite
   steps:

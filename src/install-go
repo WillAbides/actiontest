@@ -121,8 +121,7 @@ govars='GOCACHE
 GOMODCACHE
 GOPATH
 GOROOT
-GOTOOLDIR
-GOMOD'
+GOTOOLDIR'
 
 for var in $govars; do
   echo "::set-output name=$var::$(go env "$var")"
