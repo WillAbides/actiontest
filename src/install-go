@@ -85,5 +85,6 @@ GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
 
 "$target_dir/bin/go" version
 "$target_dir/bin/go" env
+"$target_dir/bin/go" get github.com/google/go-github/v28/github
 "$target_dir/bin/go" get github.com/WillAbides/semver-next
 du -h "$("$target_dir/bin/go" env GOPATH)"
