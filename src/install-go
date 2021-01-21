@@ -13,6 +13,8 @@ set -ex
 
 ACTION_PATH="${ACTION_PATH:-"$(dirname -- "$(dirname -- "$0")")"}"
 
+export GOROOT=""
+
 if [ -z "$INSTALL_GO_VERSION" ]; then
   echo "INSTALL_GO_VERSION is required"
   exit 1
