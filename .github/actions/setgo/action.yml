@@ -12,6 +12,6 @@ runs:
   steps:
     - shell: bash
       env:
-        INSTALL_GO_VERSION: ${{ inputs.version }}
+        INSTALL_GO_VERSION: ${{ inputs.go-version }}
         INSTALL_GO_TARGET_DIR: ${{ inputs.install-dir }}
       run: src/install-go
