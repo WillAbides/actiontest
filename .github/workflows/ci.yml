@@ -31,32 +31,11 @@ jobs:
         shell: bash
     steps:
       - run: env
-#      - run: go env
-#      - name: set INSTALL_GO_TMP_BASE
-#        if: ${{ runner.os == 'Windows' }}
-#        run: |
-#          echo "INSTALL_GO_TMP_BASE=$HOME/installgotmp" >> "$GITHUB_ENV"
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setgo
         id: setgo
         with:
           go-version: 1.15.6
-          install-dir: ${{ runner.tool_cache }}/go/1.15.6/x64
-#      - name: setup go
-#        shell: bash
-#        id: setup-go
-#        env:
-#          INSTALL_GO_VERSION: 1.15.2
-#          INSTALL_GO_TARGET_DIR: ${{ runner.tool_cache }}/go1.15.2/x64
-#        run: src/install-go
-#      - name: echo outputs
-#        run: |
-#          echo 'GOCACHE=${{steps.setup-go.outputs.GOCACHE}}'
-#          echo 'GOMODCACHE=${{steps.setup-go.outputs.GOMODCACHE}}'
-#          echo 'GOPATH=${{steps.setup-go.outputs.GOPATH}}'
-#          echo 'GOROOT=${{steps.setup-go.outputs.GOROOT}}'
-#          echo 'GOTOOLDIR=${{steps.setup-go.outputs.GOTOOLDIR}}'
-#          echo 'GOMOD=${{steps.setup-go.outputs.GOMOD}}'
       - env:
           outs: ${{ toJson(steps.setgo.outputs) }}
         run: echo $outs

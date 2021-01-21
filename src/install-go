@@ -5,6 +5,7 @@ set -ex
 # required global vars:
 # INSTALL_GO_VERSION=1.2.3  # the version of go to install
 # RUNNER_OS                 # provided by action
+# INSTALL_GO_TOOL_CACHE     # runner.tool_cache
 #
 # optional vars:
 # INSTALL_GO_TARGET_DIR="~/sdk/go$INSTALL_GO_VERSION"  # where to install
@@ -95,7 +96,7 @@ install_go() {
 }
 
 target_dir="$INSTALL_GO_TARGET_DIR"
-[ -n "$target_dir" ] || target_dir="$(sdk_dir)/go$INSTALL_GO_VERSION"
+[ -n "$target_dir" ] || target_dir="$INSTALL_GO_TOOL_CACHE/go/$INSTALL_GO_VERSION/x64"
 
 if [ -d "$target_dir" ]; then
   echo "$target_dir" already exists
