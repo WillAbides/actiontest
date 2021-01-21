@@ -1,25 +1,25 @@
 name: ci
 on: [ push, pull_request, workflow_dispatch ]
 jobs:
-  old:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-20.04, macos-latest, windows-2019 ]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/setup-go@v2
-        with:
-          go-version: '1.15.2'
-      - name: go version
-        shell: bash
-        run: |
-          set -x
-          go version
-          go env
-          which go
-          echo $PATH
-          which go
+#  old:
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        os: [ ubuntu-20.04, macos-latest, windows-2019 ]
+#    runs-on: ${{ matrix.os }}
+#    steps:
+#      - uses: actions/setup-go@v2
+#        with:
+#          go-version: '1.15.2'
+#      - name: go version
+#        shell: bash
+#        run: |
+#          set -x
+#          go version
+#          go env
+#          which go
+#          echo $PATH
+#          which go
   set-go:
     strategy:
       fail-fast: false
@@ -30,6 +30,7 @@ jobs:
       run:
         shell: bash
     steps:
+      - run: which bsdtar
       - run: env
       - uses: actions/checkout@v2
       - name: setup go
