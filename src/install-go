@@ -82,5 +82,5 @@ echo "::set-output name=go_install_dir::$target_dir"
 GITHUB_ENV="${GITHUB_ENV:-/dev/null}"
 GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
 
-"$target_dir/go" version
-"$target_dir/go" env
+"$target_dir/bin/go" version
+"$target_dir/bin/go" env
