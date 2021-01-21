@@ -105,9 +105,10 @@ GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
 echo "$target_dir/bin" >>$GITHUB_PATH
 PATH="$target_dir/bin:$PATH"
 
-unset GO111MODULE
 unset GOROOT
+echo "GOTOOLDIR=$GOTOOLDIR"
 unset GOTOOLDIR
+echo "GOTOOLDIR=$GOTOOLDIR"
 
 mkdir -p "$(go env GOPATH)"
 
