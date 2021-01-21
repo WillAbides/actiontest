@@ -31,6 +31,10 @@ jobs:
         shell: bash
     steps:
       - run: env
+      - id: homer
+        env:
+          theenv: ${{ toJson(env) }}
+        run: echo $theenv
       - uses: actions/checkout@v2
       - name: setup go
         shell: bash

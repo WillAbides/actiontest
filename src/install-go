@@ -64,15 +64,12 @@ version_archive_name() {
 init_tmpdir() {
   local tmpdir="${INSTALL_GO_TMP_BASE:-"$RUNNER_TEMP"}"
   tmpdir="${tmpdir:-"$TMPDIR"}"
-  if [ "$(goos)" = "windows" ]; then
-    tmpdir="$tmpdir\install-go"
-  else
-    tmpdir="$tmpdir/install-go"
-  fi
+  tmpdir="$tmpdir/install-go"
   mkdir -p "$tmpdir"
   rm -rf "$tmpdir"
   mkdir -p "$tmpdir"
   trap 'rm -rf "$tmpdir"' EXIT
+  echo "$tmpdir"
 }
 
 install_go() {
