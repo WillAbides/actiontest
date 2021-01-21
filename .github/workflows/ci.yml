@@ -41,6 +41,7 @@ jobs:
         id: setgo
         with:
           go-version: 1.15.6
+          install-dir: ${{ runner.tool_cache }}/go/1.15.6/x64
 #      - name: setup go
 #        shell: bash
 #        id: setup-go
