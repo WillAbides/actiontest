@@ -1,5 +1,5 @@
 name: ci
-on: [push, pull_request, workflow_dispatch]
+on: [ push, pull_request, workflow_dispatch ]
 jobs:
   old:
     runs-on: ubuntu-20.04
@@ -19,16 +19,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, macos-10.15, windows-2019]
+        os: [ ubuntu-20.04, macos-10.15, windows-2019 ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - name: setup go
+        shell: bash
         id: setup-go
         env:
           INSTALL_GO_VERSION: 1.15.2
         run: src/install-go
-      - run: echo '${{ toJson(steps.setup-go.outputs) }}'
+      - name: echo outputs
+        run: |
+          echo '${{steps.setup-go.outputs.go_install_dir}}'
+          echo '${{steps.setup-go.outputs.GOCACHE}}'
+          echo '${{steps.setup-go.outputs.GOMODCACHE}}'
+          echo '${{steps.setup-go.outputs.GOPATH}}'
+          echo '${{steps.setup-go.outputs.GOROOT}}'
+          echo '${{steps.setup-go.outputs.GOTOOLDIR}}'
+          echo '${{steps.setup-go.outputs.GOMOD}}'
 
 #          go$goversion download
 #  new:
