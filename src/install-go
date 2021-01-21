@@ -9,7 +9,6 @@ set -ex
 # optional vars:
 # INSTALL_GO_TARGET_DIR="~/sdk/go$INSTALL_GO_VERSION"  # where to install
 # INSTALL_GO_FORCE                                     # set to non-empty to force the install
-# INSTALL_GO_OS                                        # set to darwin,windows or linux to override the system os
 
 if [ -z "$INSTALL_GO_VERSION" ]; then
   echo "INSTALL_GO_VERSION is required"
@@ -32,10 +31,6 @@ sdk_dir() {
 }
 
 goos() {
-  if [ -n "$INSTALL_GO_OS" ]; then
-    echo "$INSTALL_GO_OS"
-    return
-  fi
   case "$RUNNER_OS" in
   macOS)
     echo "darwin"
@@ -53,7 +48,7 @@ goos() {
 }
 
 extension() {
-  if [ "$(goos)"  = "windows" ]; then
+  if [ "$(goos)" = "windows" ]; then
     echo ".zip"
   else
     echo ".tar.gz"
@@ -65,60 +60,67 @@ version_archive_name() {
   echo "$version.$(goos)-amd64$(extension)"
 }
 
-target_dir="$INSTALL_GO_TARGET_DIR"
-[ -n "$target_dir" ] || target_dir="$(sdk_dir)/go$INSTALL_GO_VERSION"
+install_go() {
+  target_dir="$1"
+  mkdir -p "$(dirname "$target_dir")"
+  tmpdir="${RUNNER_TEMP:-"$TMPDIR"}/install-go"
+  rm -rf "$tmpdir"
+  mkdir -p "$tmpdir"
+  trap 'rm -rf "$tmpdir"' EXIT
+  cd "$tmpdir"
 
-if [ -d "$target_dir" ]; then
-  echo "$target_dir" already exists
-  if [ -z "$INSTALL_GO_FORCE" ]; then
-    exit 0
+  archive_name="$(version_archive_name go"$INSTALL_GO_VERSION")"
+
+  # 4 retries is 15 seconds of waiting
+  curl --retry 4 --fail -O "https://storage.googleapis.com/golang/$archive_name"
+
+  if [ "$(extension)" = ".zip" ]; then
+    unzip "$archive_name"
+  else
+    tar -xzf "$archive_name"
   fi
-  rm -rf "$target_dir"
-fi
-mkdir -p "$(dirname "$target_dir")"
-tmpdir="${RUNNER_TEMP:-"$TMPDIR"}/install-go"
-rm -rf "$tmpdir"
-mkdir -p "$tmpdir"
+  mv "go" "$target_dir"
 
-trap 'rm -rf "$tmpdir"' EXIT
+  cd -
+}
 
-cd "$tmpdir"
+finish() {
+  local target_dir="$1"
+  GITHUB_ENV="${GITHUB_ENV:-/dev/null}"
+  GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
 
-archive_name="$(version_archive_name go"$INSTALL_GO_VERSION")"
+  echo "$target_dir/bin" >>$GITHUB_PATH
+  PATH="$target_dir/bin:$PATH"
 
-# 4 retries is 15 seconds of waiting
-curl --retry 4 --fail -O "https://storage.googleapis.com/golang/$archive_name"
+  mkdir -p "$(go env GOPATH)"
 
-if [ "$(extension)" = ".zip" ]; then
-  unzip "$archive_name"
-else
-  tar -xzf "$archive_name"
-fi
+  unset GOROOT
+  echo "GOROOT=" >>$GITHUB_ENV
 
-ls -haltr .
-mv "go" "$target_dir"
-
-echo "::set-output name=go_install_dir::$target_dir"
-GITHUB_ENV="${GITHUB_ENV:-/dev/null}"
-GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
-
-echo "$target_dir/bin" >>$GITHUB_PATH
-PATH="$target_dir/bin:$PATH"
-
-unset GOROOT
-echo "GOTOOLDIR=$GOTOOLDIR"
-unset GOTOOLDIR
-echo "GOTOOLDIR=$GOTOOLDIR"
-
-mkdir -p "$(go env GOPATH)"
-
-govars='GOCACHE
+  govars='GOCACHE
 GOMODCACHE
 GOPATH
 GOROOT
 GOTOOLDIR
 GOMOD'
 
-for var in $govars; do
-  echo "::set-output name=$var::$(go env "$var")"
-done
+  for var in $govars; do
+    echo "::set-output name=$var::$(go env "$var")"
+  done
+}
+
+target_dir="$INSTALL_GO_TARGET_DIR"
+[ -n "$target_dir" ] || target_dir="$(sdk_dir)/go$INSTALL_GO_VERSION"
+
+if [ -d "$target_dir" ]; then
+  echo "$target_dir" already exists
+  if [ -z "$INSTALL_GO_FORCE" ]; then
+    finish "$target_dir"
+    exit 0
+  fi
+  rm -rf "$target_dir"
+fi
+
+install_go "$target_dir"
+
+finish "$target_dir"
