@@ -23,9 +23,11 @@ jobs:
       - run: |
           ls -haltr /opt/hostedtoolcache/go
       - name: setup go
+        id: setup-go
         env:
           INSTALL_GO_VERSION: 1.15.2
         run: src/install-go
+      - run: echo '${{ toJson(steps.setup-go.outputs) }}'
 
 #          go$goversion download
 #  new:
