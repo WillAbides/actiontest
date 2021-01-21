@@ -55,8 +55,9 @@ goos() {
 extension() {
   if [ "$(goos)"  = "windows" ]; then
     echo ".zip"
+  else
+    echo ".tar.gz"
   fi
-  echo ".tar.gz"
 }
 
 version_archive_name() {
