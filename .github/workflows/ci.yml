@@ -32,7 +32,7 @@ jobs:
     steps:
       - run: env
       - id: set INSTALL_GO_TMP_BASE
-        if: ${{ runner.os == "Windows" }}
+        if: ${{ runner.os == 'Windows' }}
         run: |
           echo "INSTALL_GO_TMP_BASE=$HOME/installgotmp" >> "$GITHUB_ENV"
       - uses: actions/checkout@v2
