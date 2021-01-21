@@ -59,6 +59,7 @@ jobs:
       - run: go env
       - env:
           outs: ${{ toJson(steps.setgo.outputs.GOCACHE) }}
+        run: echo $outs
 
 #          go$goversion download
 #  new:
