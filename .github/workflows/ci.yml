@@ -31,13 +31,13 @@ jobs:
         run: src/install-go
       - name: echo outputs
         run: |
-          echo '${{steps.setup-go.outputs.go_install_dir}}'
-          echo '${{steps.setup-go.outputs.GOCACHE}}'
-          echo '${{steps.setup-go.outputs.GOMODCACHE}}'
-          echo '${{steps.setup-go.outputs.GOPATH}}'
-          echo '${{steps.setup-go.outputs.GOROOT}}'
-          echo '${{steps.setup-go.outputs.GOTOOLDIR}}'
-          echo '${{steps.setup-go.outputs.GOMOD}}'
+          echo 'go_install_dir=${{steps.setup-go.outputs.go_install_dir}}'
+          echo 'GOCACHE=${{steps.setup-go.outputs.GOCACHE}}'
+          echo 'GOMODCACHE=${{steps.setup-go.outputs.GOMODCACHE}}'
+          echo 'GOPATH=${{steps.setup-go.outputs.GOPATH}}'
+          echo 'GOROOT=${{steps.setup-go.outputs.GOROOT}}'
+          echo 'GOTOOLDIR=${{steps.setup-go.outputs.GOTOOLDIR}}'
+          echo 'GOMOD=${{steps.setup-go.outputs.GOMOD}}'
 
 #          go$goversion download
 #  new:

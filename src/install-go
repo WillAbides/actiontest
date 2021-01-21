@@ -68,7 +68,7 @@ cd "$tmpdir"
 archive_name="$(version_archive_name go"$INSTALL_GO_VERSION" "$(goos)")"
 
 # 4 retries is 15 seconds of waiting
-curl -s  --retry 4 --fail -O \
+curl  --retry 4 --fail -O \
   "https://storage.googleapis.com/golang/$archive_name"
 
 tarcmd="tar"
