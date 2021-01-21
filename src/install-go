@@ -85,7 +85,7 @@ install_go() {
   curl --retry 4 --fail -O "https://storage.googleapis.com/golang/$archive_name"
 
   if [ "$(extension)" = ".zip" ]; then
-    unzip -q "$archive_name"
+    7z -y x "$archive_name"
   else
     tar -xzf "$archive_name"
   fi
