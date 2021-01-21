@@ -13,13 +13,12 @@ set -ex
 
 ACTION_PATH="${ACTION_PATH:-"$(dirname -- "$(dirname -- "$0")")"}"
 
-export GOROOT=""
-
 if [ -z "$INSTALL_GO_VERSION" ]; then
   echo "INSTALL_GO_VERSION is required"
   exit 1
 fi
 
+export GOROOT=""
 export GO111MODULE=off
 
 homedir() {
@@ -86,3 +85,4 @@ GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
 
 "$target_dir/bin/go" version
 "$target_dir/bin/go" env
+du -h "$("$target_dir/bin/go" env GOPATH)"
