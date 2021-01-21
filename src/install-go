@@ -90,7 +90,7 @@ curl  --retry 4 --fail -O \
   "https://storage.googleapis.com/golang/$archive_name"
 
 tarcmd="tar"
-[ "$(gopherize_runner_os)" = "windows" ] && tarcmd="tar.exe"
+#[ "$(gopherize_runner_os)" = "windows" ] && tarcmd="tar.exe"
 
 $tarcmd -xzf "$archive_name"
 ls -haltr .
