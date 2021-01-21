@@ -4,6 +4,7 @@ set -ex
 
 # required global vars:
 # INSTALL_GO_VERSION=1.2.3  # the version of go to install
+# RUNNER_OS                 # provided by action
 #
 # optional vars:
 # INSTALL_GO_TARGET_DIR="~/sdk/go$INSTALL_GO_VERSION"  # where to install
@@ -35,7 +36,24 @@ goos() {
     echo "$INSTALL_GO_OS"
     return
   fi
-  uname -s | tr '[:upper:]' '[:lower:]'
+  gopherize_runner_os
+}
+
+gopherize_runner_os() {
+    case "$RUNNER_OS" in
+  macOS)
+    echo "darwin"
+    ;;
+  Linux)
+    echo "linux"
+    ;;
+  Windows)
+    echo "windows"
+    ;;
+  *)
+    uname -s | tr '[:upper:]' '[:lower:]'
+    ;;
+  esac
 }
 
 version_archive_name() {
@@ -72,7 +90,7 @@ curl  --retry 4 --fail -O \
   "https://storage.googleapis.com/golang/$archive_name"
 
 tarcmd="tar"
-[ "$(uname -s)" = "Windows" ] && tarcmd="tar.exe"
+[ "$(gopherize_runner_os)" = "windows" ] && tarcmd="tar.exe"
 
 $tarcmd -xzf "$archive_name"
 ls -haltr .
