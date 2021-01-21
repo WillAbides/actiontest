@@ -23,7 +23,7 @@ jobs:
           ls -haltr /opt/hostedtoolcache/go
       - name: setup go
         env:
-          GO_VERSION: 1.15.2
+          INSTALL_GO_VERSION: 1.15.2
         run: src/install-go
 
 #          go$goversion download
