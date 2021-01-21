@@ -93,4 +93,4 @@ go version
 go env
 mkdir -p "$(go env GOPATH)"
 du -h "$(go env GOPATH)"
-go get -d github.com/mvdan/gofumpt
+go get -d mvdan.cc/gofumpt
