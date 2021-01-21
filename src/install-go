@@ -4,14 +4,11 @@ set -ex
 
 # required global vars:
 # INSTALL_GO_VERSION=1.2.3  # the version of go to install
-# $ACTION_PATH              # where's the action? set it to ${{ runner.action }}
 #
 # optional vars:
 # INSTALL_GO_TARGET_DIR="~/sdk/go$INSTALL_GO_VERSION"  # where to install
 # INSTALL_GO_FORCE                                     # set to non-empty to force the install
 # INSTALL_GO_OS                                        # set to darwin,windows or linux to override the system os
-
-ACTION_PATH="${ACTION_PATH:-"$(dirname -- "$(dirname -- "$0")")"}"
 
 if [ -z "$INSTALL_GO_VERSION" ]; then
   echo "INSTALL_GO_VERSION is required"
