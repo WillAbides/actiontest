@@ -38,6 +38,7 @@ jobs:
 #          echo "INSTALL_GO_TMP_BASE=$HOME/installgotmp" >> "$GITHUB_ENV"
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setgo
+        id: setgo
         with:
           go-version: 1.15.2
 #      - name: setup go
@@ -56,6 +57,8 @@ jobs:
 #          echo 'GOTOOLDIR=${{steps.setup-go.outputs.GOTOOLDIR}}'
 #          echo 'GOMOD=${{steps.setup-go.outputs.GOMOD}}'
       - run: go env
+      - env:
+          outs: ${{ toJson(steps.setgo.outputs.GOCACHE) }}
 
 #          go$goversion download
 #  new:

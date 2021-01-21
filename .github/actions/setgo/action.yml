@@ -7,10 +7,15 @@ inputs:
   install-dir:
     required: false
     description: "where to install"
+outputs:
+  GOCACHE:
+    description: go env GOCACHE
+    value: ${{ steps.install-go.outputs.GOCACHE }}
 runs:
   using: composite
   steps:
-    - shell: bash
+    - id: install-go
+      shell: bash
       env:
         INSTALL_GO_VERSION: ${{ inputs.go-version }}
         INSTALL_GO_TARGET_DIR: ${{ inputs.install-dir }}
