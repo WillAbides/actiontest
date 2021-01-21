@@ -33,7 +33,7 @@ jobs:
       - run: env
       - id: homer
         env:
-          theenv: ${{ toJson(env) }}
+          theenv: ${{ toJson(github) }}
         run: echo $theenv
       - uses: actions/checkout@v2
       - name: setup go
