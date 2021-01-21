@@ -31,10 +31,10 @@ jobs:
         shell: bash
     steps:
       - run: env
-      - id: homer
-        env:
-          theenv: ${{ toJson(github) }}
-        run: echo $theenv
+      - id: set INSTALL_GO_TMP_BASE
+        if: ${{ runner.os == "Windows" }}
+        run: |
+          echo "INSTALL_GO_TMP_BASE=$HOME/installgotmp" >> "$GITHUB_ENV"
       - uses: actions/checkout@v2
       - name: setup go
         shell: bash
