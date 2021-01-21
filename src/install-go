@@ -35,15 +35,15 @@ goos() {
     echo "$INSTALL_GO_OS"
     return
   fi
-  echo "$(uname -s)" | tr '[:upper:]' '[:lower:]'
+  uname -s | tr '[:upper:]' '[:lower:]'
 }
 
 version_archive_name() {
   local version="$1"
-  local goos="$2"
+  local os="$2"
   ext=".tar.gz"
-  [ "$goos" == "windows" ] && ext=".zip"
-  echo "$version.$goos-amd64$ext"
+  [ "$os" == "windows" ] && ext=".zip"
+  echo "$version.$os-amd64$ext"
 }
 
 target_dir="$INSTALL_GO_TARGET_DIR"
