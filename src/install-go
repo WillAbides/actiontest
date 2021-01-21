@@ -55,6 +55,7 @@ if [ -d "$target_dir" ]; then
   fi
   rm -rf "$target_dir"
 fi
+mkdir -p "$(dirname "$target_dir")"
 tmpdir="${RUNNER_TEMP:-"$TMPDIR"}/install-go"
 rm -rf "$tmpdir"
 mkdir -p "$tmpdir"
