@@ -83,10 +83,13 @@ echo "::set-output name=go_install_dir::$target_dir"
 GITHUB_ENV="${GITHUB_ENV:-/dev/null}"
 GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
 
-unset GO111MODULE
+echo "$target_dir/bin" >> $GITHUB_PATH
+PATH="$target_dir/bin:$PATH"
 
-"$target_dir/bin/go" version
-"$target_dir/bin/go" env
-"$target_dir/bin/go" get github.com/google/go-github/v28/github
-"$target_dir/bin/go" get github.com/WillAbides/semver-next
-du -h "$("$target_dir/bin/go" env GOPATH)"
+unset GO111MODULE
+unset GOROOT
+
+go version
+go env
+mkdir -p "$(go env GOPATH)"
+du -h "$(go env GOPATH)"
