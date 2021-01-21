@@ -93,4 +93,5 @@ go version
 go env
 mkdir -p "$(go env GOPATH)"
 du -h "$(go env GOPATH)"
-go get golang.org/x/tools/cmd/gopls
+go get golang.org/x/tools/cmd/gopls || true
+du -h "$(go env GOPATH)"
