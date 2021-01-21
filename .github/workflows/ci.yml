@@ -17,14 +17,12 @@ jobs:
           which go
   set-go:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-20.04, macos-10.15, windows-2019]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - run: env
-      - run: |
-          ls -haltr /opt/hostedtoolcache/go
       - name: setup go
         id: setup-go
         env:
