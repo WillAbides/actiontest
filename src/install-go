@@ -83,6 +83,8 @@ echo "::set-output name=go_install_dir::$target_dir"
 GITHUB_ENV="${GITHUB_ENV:-/dev/null}"
 GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
 
+unset GO111MODULE
+
 "$target_dir/bin/go" version
 "$target_dir/bin/go" env
 "$target_dir/bin/go" get github.com/google/go-github/v28/github
