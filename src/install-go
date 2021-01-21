@@ -71,4 +71,5 @@ tarcmd="tar"
 [ "$(uname -s)" = "Windows" ] && tarcmd="tar.exe"
 
 $tarcmd -xzf "$archive_name"
+ls -haltr .
 mv "go" "$target_dir"
