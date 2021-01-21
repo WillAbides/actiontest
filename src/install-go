@@ -62,6 +62,7 @@ version_archive_name() {
 
 install_go() {
   target_dir="$1"
+  rm -rf "$target_dir"
   mkdir -p "$(dirname "$target_dir")"
   tmpdir="${RUNNER_TEMP:-"$TMPDIR"}/install-go"
   rm -rf "$tmpdir"
@@ -75,7 +76,7 @@ install_go() {
   curl --retry 4 --fail -O "https://storage.googleapis.com/golang/$archive_name"
 
   if [ "$(extension)" = ".zip" ]; then
-    unzip "$archive_name"
+    unzip -q "$archive_name"
   else
     tar -xzf "$archive_name"
   fi
@@ -84,43 +85,36 @@ install_go() {
   cd -
 }
 
-finish() {
-  local target_dir="$1"
-  GITHUB_ENV="${GITHUB_ENV:-/dev/null}"
-  GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
-
-  echo "$target_dir/bin" >>$GITHUB_PATH
-  PATH="$target_dir/bin:$PATH"
-
-  mkdir -p "$(go env GOPATH)"
-
-  unset GOROOT
-  echo "GOROOT=" >>$GITHUB_ENV
-
-  govars='GOCACHE
-GOMODCACHE
-GOPATH
-GOROOT
-GOTOOLDIR
-GOMOD'
-
-  for var in $govars; do
-    echo "::set-output name=$var::$(go env "$var")"
-  done
-}
-
 target_dir="$INSTALL_GO_TARGET_DIR"
 [ -n "$target_dir" ] || target_dir="$(sdk_dir)/go$INSTALL_GO_VERSION"
 
 if [ -d "$target_dir" ]; then
   echo "$target_dir" already exists
   if [ -z "$INSTALL_GO_FORCE" ]; then
-    finish "$target_dir"
-    exit 0
+    skip_install=1
   fi
-  rm -rf "$target_dir"
 fi
 
-install_go "$target_dir"
+[ -n "$skip_install" ] || install_go "$target_dir"
 
-finish "$target_dir"
+GITHUB_ENV="${GITHUB_ENV:-/dev/null}"
+GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
+
+echo "$target_dir/bin" >>$GITHUB_PATH
+PATH="$target_dir/bin:$PATH"
+
+mkdir -p "$(go env GOPATH)"
+
+unset GOROOT
+echo "GOROOT=" >>$GITHUB_ENV
+
+govars='GOCACHE
+GOMODCACHE
+GOPATH
+GOROOT
+GOTOOLDIR
+GOMOD'
+
+for var in $govars; do
+  echo "::set-output name=$var::$(go env "$var")"
+done
