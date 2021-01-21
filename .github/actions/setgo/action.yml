@@ -1,0 +1,17 @@
+name: 'Set Go'
+description: like actions/setup-go but worse
+inputs:
+  go-version:
+    required: true
+    description: "version of go to install"
+  install-dir:
+    required: false
+    description: "where to install"
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        INSTALL_GO_VERSION: ${{ inputs.version }}
+        INSTALL_GO_TARGET_DIR: ${{ inputs.install-dir }}
+      run: src/install-go
