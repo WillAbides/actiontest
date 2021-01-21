@@ -31,6 +31,7 @@ jobs:
         shell: bash
     steps:
       - run: env
+      - run: go env
       - run: cat "$(go env GOENV)"
       - name: set INSTALL_GO_TMP_BASE
         if: ${{ runner.os == 'Windows' }}
