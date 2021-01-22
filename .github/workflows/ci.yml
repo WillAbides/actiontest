@@ -37,7 +37,7 @@ jobs:
         id: setgo
         with:
           go-version: "1.15.x"
-#          ignore-local: "true"
+          ignore-local: true
       - env:
           outs: ${{ toJson(steps.setgo.outputs) }}
         run: |
