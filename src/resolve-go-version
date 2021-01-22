@@ -9,6 +9,8 @@
 set -e
 [ -n "$DEBUG" ] && set -x
 
+CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
+
 . src/lib
 
 GO_VERSION_CONSTRAINT="$1"

@@ -74,7 +74,7 @@ install_go() {
   archive_name="$(version_archive_name go"$go_version")"
 
   # 4 retries is 15 seconds of waiting
-  curl --retry 4 --fail -O "$(download_go_url "$go_version")"
+  curl -s --retry 4 --fail -O "$(download_go_url "$go_version")"
 
   if [ "$(extension)" = ".zip" ]; then
     unzip -q "$archive_name"

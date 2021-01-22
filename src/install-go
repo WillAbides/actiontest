@@ -11,9 +11,9 @@
 set -e
 [ -n "$DEBUG" ] && set -x
 
-. src/lib
-
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
+
+. src/lib
 
 if [ -z "$INSTALL_GO_VERSION" ]; then
   echo "INSTALL_GO_VERSION is required"
