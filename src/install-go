@@ -33,6 +33,11 @@ readonly go_version=$(
     "$INSTALL_GO_TOOL_CACHE/go"
 )
 
+if [ -z "$go_version" ]; then
+  echo "::error ::No go version found matching '$INSTALL_GO_VERSION'"
+  exit 1
+fi
+
 homedir() {
   if [ "$(uname -s)" = "Windows" ]; then
     echo "$USERPROFILE"
