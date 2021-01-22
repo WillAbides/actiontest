@@ -24,7 +24,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-20.04, macos-latest, windows-2019 ]
+        os: [ ubuntu-20.04 ]
+#        os: [ ubuntu-20.04, macos-latest, windows-2019 ]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -35,7 +36,7 @@ jobs:
       - uses: ./.github/actions/setgo
         id: setgo
         with:
-          go-version: "^1.15"
+          go-version: "1.15.x"
           ignore-local: "true"
       - env:
           outs: ${{ toJson(steps.setgo.outputs) }}

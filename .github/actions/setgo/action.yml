@@ -11,7 +11,7 @@ inputs:
   go-version:
     required: true
     description: |
-      The version of go to install. It can be an exact version or a semver constraint like '1.14' or '^1.14.4'
+      The version of go to install. It can be an exact version or a semver constraint like '1.14.x' or '^1.14.4'
 outputs:
   GOCACHE:
     description: go env GOCACHE
