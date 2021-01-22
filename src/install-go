@@ -25,6 +25,11 @@ fi
 export GOROOT=""
 export GO111MODULE=off
 
+if [ "$INSTALL_GO_VERSION" = "gotip" ] || [ "$INSTALL_GO_VERSION" = "tip" ]; then
+  install_go_tip='1'
+  INSTALL_GO_VERSION='*'
+fi
+
 homedir() {
   if [ "$(uname -s)" = "Windows" ]; then
     echo "$USERPROFILE"
@@ -122,6 +127,11 @@ mkdir -p "$(go env GOPATH)"
 
 unset GOROOT
 echo "GOROOT=" >>"$GITHUB_ENV"
+
+if [ -n "$install_go_tip" ]; then
+    go get golang.org/dl/gotip
+    gotip download
+fi
 
 govars='GOCACHE
 GOMODCACHE
