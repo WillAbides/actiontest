@@ -31,6 +31,13 @@ for v in $local_versions; do
   fi
 done
 
+# if the exact version is available to download, use it
+check_url="$(download_go_url "$GO_VERSION_CONSTRAINT")"
+if curl -IL --fail -s "$check_url"; then
+  echo "$GO_VERSION_CONSTRAINT"
+  exit
+fi
+
 set +e
 local_matches="$(echo "$local_versions" | "$action_dir/third_party/sh-semver/semver.sh" -r "$GO_VERSION_CONSTRAINT")"
 set -e
