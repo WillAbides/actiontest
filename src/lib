@@ -57,6 +57,12 @@ init_tmpdir() {
   echo "$tmpdir"
 }
 
+download_go_url() {
+  local go_version="$1"
+  archive_name="$(version_archive_name go"$go_version")"
+  echo "https://storage.googleapis.com/golang/$archive_name"
+}
+
 install_go() {
   local go_version="$1"
   local target_dir="$2"
@@ -68,7 +74,7 @@ install_go() {
   archive_name="$(version_archive_name go"$go_version")"
 
   # 4 retries is 15 seconds of waiting
-  curl --retry 4 --fail -O "https://storage.googleapis.com/golang/$archive_name"
+  curl --retry 4 --fail -O "$(download_go_url "$go_version")"
 
   if [ "$(extension)" = ".zip" ]; then
     unzip -q "$archive_name"
