@@ -1,6 +1,12 @@
 name: 'Set Go'
 description: like actions/setup-go but worse
 inputs:
+  ignore-local:
+    required: false
+    description: |
+      Normally a pre-installed version of go that meets the go-version constraints will be used instead
+      of checking whether a newer version is available for download. If you set this to true, the
+      action will always check for a newer version available for download.
   go-version:
     required: true
     description: |
