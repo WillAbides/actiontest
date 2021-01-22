@@ -117,15 +117,17 @@ GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
 
 echo "$target_dir/bin" >>"$GITHUB_PATH"
 PATH="$target_dir/bin:$PATH"
-
-mkdir -p "$(go env GOPATH)"
+gopath=$(go env GOPATH)
+mkdir -p "$gopath/bin"
+echo "$gopath/bin" >>"$GITHUB_PATH"
+PATH="$gopath/bin:$PATH"
 
 unset GOROOT
 echo "GOROOT=" >>"$GITHUB_ENV"
 
 if [ -n "$INSTALL_GO_TIP" ]; then
-    GO111MODULE=off go get golang.org/dl/gotip
-    gotip download
+  GO111MODULE=off go get golang.org/dl/gotip
+  gotip download
 fi
 
 govars='GOCACHE
