@@ -37,7 +37,7 @@ runs:
           constraint='*'
           echo "INSTALL_GO_TIP=1" >> "$GITHUB_ENV"
         fi
-        got="$(src/resolve-go-version '${{ inputs.go-version }}' '${{ runner.tool_cache }}/go')"
+        got="$(src/resolve-go-version "$constraint" '${{ runner.tool_cache }}/go')"
         if [ -z "$got" ]; then
           echo "::error ::No go version found matching '${{ inputs.go-version }}'"
           exit 1
