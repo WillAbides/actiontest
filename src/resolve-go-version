@@ -11,6 +11,12 @@ set -e
 GO_VERSION_CONSTRAINT="$1"
 GO_TOOL_CACHE="$2"
 
+# special case for gotip
+if [ "$GO_VERSION_CONSTRAINT" = "gotip" ] || [ "$GO_VERSION_CONSTRAINT" = "tip" ]; then
+  echo "tip"
+  exit
+fi
+
 action_dir="$(dirname -- "$(dirname -- "$0")")"
 
 local_versions="$(ls "$GO_TOOL_CACHE")"
