@@ -35,7 +35,7 @@ jobs:
       - uses: ./.github/actions/setgo
         id: setgo
         with:
-          go-version: "~1.13"
+          go-version: "1.13"
       - env:
           outs: ${{ toJson(steps.setgo.outputs) }}
         run: echo $outs | jq .
