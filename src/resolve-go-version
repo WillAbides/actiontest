@@ -33,7 +33,7 @@ done
 
 # if the exact version is available to download, use it
 check_url="$(download_go_url "$GO_VERSION_CONSTRAINT")"
-if curl -IL --fail -s "$check_url"; then
+if curl -IL --fail -s "$check_url" >/dev/null; then
   echo "$GO_VERSION_CONSTRAINT"
   exit
 fi
