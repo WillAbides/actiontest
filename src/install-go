@@ -136,7 +136,7 @@ echo "GOROOT=" >>"$GITHUB_ENV"
 
 if [ -n "$INSTALL_GO_TIP" ]; then
   GO111MODULE=off go get golang.org/dl/gotip
-  "$(exe_name gotip)" download
+  "$gopath/bin/$(exe_name gotip)" download
   rm -rf "$tip_target_dir"
   mkdir -p "$(dirname "$tip_target_dir")"
   mv "$(sdk_dir)/gotip" "$tip_target_dir"
