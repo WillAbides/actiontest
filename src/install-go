@@ -124,7 +124,7 @@ unset GOROOT
 echo "GOROOT=" >>"$GITHUB_ENV"
 
 if [ -n "$INSTALL_GO_TIP" ]; then
-    go get golang.org/dl/gotip
+    GO111MODULE=off go get golang.org/dl/gotip
     gotip download
 fi
 
