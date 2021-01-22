@@ -1,12 +1,13 @@
-name: 'Set Go'
-description: like actions/setup-go but worse
+name: 'Setup Go Faster'
+description: like actions/setup-go but faster
 inputs:
   ignore-local:
     required: false
     description: |
       Normally a pre-installed version of go that meets the go-version constraints will be used instead
-      of checking whether a newer version is available for download. If you set this to true, the
-      action will always check for a newer version available for download.
+      of checking whether a newer version is available for download. With ignore-local, the
+      action will always check for a newer version available for download. Set this to any non-empty value
+      to enable.
   go-version:
     required: true
     description: |
@@ -37,6 +38,9 @@ runs:
       run: |
         set -e
         [ -n "$DEBUG" ] && set -x
+
+        export IGNORE_LOCAL_GO='${{ inputs.ignore-local }}'
+
         constraint='${{ inputs.go-version }}'
         if [ '${{ inputs.go-version }}' = "tip" ] || [ '${{ inputs.go-version }}' = "gotip" ]; then
           constraint='*'
