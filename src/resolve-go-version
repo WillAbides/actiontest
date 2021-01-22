@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# required args:
+# $1 - constraint (^1.2.3)
+# $2 - tool cache (${{runner.tool_cache}}/go)
+# GO_VERSION_CONSTRAINT='^1.2.3'  # the version of go to install
+# GO_TOOL_CACHE                           # ${{runner.tool_cache}}/go
+
+set -e
+
+GO_VERSION_CONSTRAINT="$1"
+GO_TOOL_CACHE="$2"
+
+action_dir="$(dirname -- "$(dirname -- "$0")")"
+
+local_versions="$(ls "$GO_TOOL_CACHE")"
+
+# return any exact matches first for fastest possible result
+for v in $local_versions; do
+  if [ "$v" = "$GO_VERSION_CONSTRAINT" ]; then
+    echo "$v"
+    exit
+  fi
+done
+
+local_matches="$(echo "$local_versions" | "$action_dir/third_party/sh-semver/semver.sh" -r "$GO_VERSION_CONSTRAINT")"
+if [ -n "$local_matches" ]; then
+ echo "$local_matches" | head -1
+ exit
+fi
+
+dl_json="$(curl --retry 4 -s --fail 'https://golang.org/dl/?mode=json&include=all')"
+dl_versions="$(echo "$dl_json" | jq -r '.[].version' | sed 's/^go//g')"
+
+echo "$dl_versions" | "$action_dir"/src/semver-select -c "$GO_VERSION_CONSTRAINT" -n 1 -i -

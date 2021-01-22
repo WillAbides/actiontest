@@ -3,10 +3,12 @@ description: like actions/setup-go but worse
 inputs:
   go-version:
     required: true
-    description: "version of go to install"
+    description: |
+      The version of go to install. This must be the exact version number. No fancy semver tricks here.
   install-dir:
     required: false
-    description: "where to install instead of <tool_cache>/go/<go-version>/x64"
+    description: |
+      Where to install go. Default: <tool_cache>/go/<go-version>/x64
 outputs:
   GOCACHE:
     description: go env GOCACHE
