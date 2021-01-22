@@ -27,7 +27,7 @@ runs:
     - id: resolve-go-version
       shell: bash
       run: |
-        set -ex
+        set -e
         constraint='${{ inputs.go-version }}'
         if [ '${{ inputs.go-version }}' = "tip" ] || [ '${{ inputs.go-version }}' = "gotip" ]; then
           constraint='*'
