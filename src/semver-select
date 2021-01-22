@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+[ -n "$DEBUG" ] && set -x
 
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 

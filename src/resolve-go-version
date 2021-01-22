@@ -6,7 +6,8 @@
 # GO_VERSION_CONSTRAINT='^1.2.3'  # the version of go to install
 # GO_TOOL_CACHE                           # ${{runner.tool_cache}}/go
 
-set -ex
+set -e
+[ -n "$DEBUG" ] && set -x
 
 . src/lib
 

@@ -8,7 +8,8 @@
 # optional vars:
 # INSTALL_GO_FORCE                                     # set to non-empty to force the install
 
-set -ex
+set -e
+[ -n "$DEBUG" ] && set -x
 
 . src/lib
 
