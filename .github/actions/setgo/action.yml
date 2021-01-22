@@ -31,10 +31,11 @@ runs:
     - id: resolve-go-version
       shell: bash
       run: |
+        set -ex
         constraint='${{ inputs.go-version }}'
         if [ '${{ inputs.go-version }}' = "tip" ] || [ '${{ inputs.go-version }}' = "gotip" ]; then
           constraint='*'
-          echo "INSTALL_GO_TIP=1 >> "$GITHUB_ENV"
+          echo "INSTALL_GO_TIP=1" >> "$GITHUB_ENV"
         fi
         got="$(src/resolve-go-version '${{ inputs.go-version }}' '${{ runner.tool_cache }}/go')"
         if [ -z "$got" ]; then
