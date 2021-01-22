@@ -4,7 +4,7 @@ inputs:
   go-version:
     required: true
     description: |
-      The version of go to install. This must be the exact version number. No fancy semver tricks here.
+      The version of go to install. It can be an exact version or a semver constraint like '1.14' or '^1.14.4'
   install-dir:
     required: false
     description: |
@@ -28,10 +28,18 @@ outputs:
 runs:
   using: composite
   steps:
+    - id: resolve-go-version
+      shell: bash
+      run: |
+        got="$(src/resolve-go-version '${{ inputs.go-version }}' '${{ runner.tool_cache }}/go')"
+        if [ -z "$got" ]; then
+          echo "::error ::No go version found matching '${{ inputs.go-version }}'"
+          exit 1
+        fi
+        echo "INSTALL_GO_VERSION=$got" >> "$GITHUB_ENV"
     - id: install-go
       shell: bash
       env:
         INSTALL_GO_TOOL_CACHE: ${{ runner.tool_cache }}
-        INSTALL_GO_VERSION: ${{ inputs.go-version }}
         INSTALL_GO_TARGET_DIR: ${{ inputs.install-dir }}
       run: src/install-go
