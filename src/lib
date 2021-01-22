@@ -83,7 +83,7 @@ install_go() {
   fi
   mv "go" "$target_dir"
 
-  cd -
+  cd - >/dev/null
 }
 
 exe_name() {
