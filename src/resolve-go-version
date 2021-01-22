@@ -8,6 +8,8 @@
 
 set -e
 
+. src/lib
+
 GO_VERSION_CONSTRAINT="$1"
 GO_TOOL_CACHE="$2"
 
