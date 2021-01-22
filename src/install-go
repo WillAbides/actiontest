@@ -109,6 +109,8 @@ exe_name() {
 target_dir="$INSTALL_GO_TARGET_DIR"
 [ -n "$target_dir" ] || target_dir="$INSTALL_GO_TOOL_CACHE/go/$INSTALL_GO_VERSION/x64"
 
+tip_target_dir="$INSTALL_GO_TOOL_CACHE/go/tip/x64"
+
 if [ -d "$target_dir" ]; then
   echo "$target_dir" already exists
   if [ -z "$INSTALL_GO_FORCE" ]; then
@@ -123,6 +125,7 @@ GITHUB_PATH="${GITHUB_PATH:-/dev/null}"
 
 echo "$target_dir/bin" >>"$GITHUB_PATH"
 PATH="$target_dir/bin:$PATH"
+
 gopath=$(go env GOPATH)
 mkdir -p "$gopath/bin"
 echo "$gopath/bin" >>"$GITHUB_PATH"
@@ -134,7 +137,12 @@ echo "GOROOT=" >>"$GITHUB_ENV"
 if [ -n "$INSTALL_GO_TIP" ]; then
   GO111MODULE=off go get golang.org/dl/gotip
   "$(exe_name gotip)" download
-  mv "$gopath/bin/$(exe_name gotip)" "$gopath/bin/$(exe_name go)"
+  rm -rf "$tip_target_dir"
+  mkdir -p "$(dirname "$tip_target_dir")"
+  mv "$(sdk_dir)/gotip" "$tip_target_dir"
+
+  PATH="$tip_target_dir/bin:$PATH"
+  echo "$tip_target_dir/bin" >>"$GITHUB_PATH"
 fi
 
 govars='GOCACHE
