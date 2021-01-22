@@ -23,13 +23,22 @@ for v in $local_versions; do
   fi
 done
 
+set +e
 local_matches="$(echo "$local_versions" | "$action_dir/third_party/sh-semver/semver.sh" -r "$GO_VERSION_CONSTRAINT")"
+set -e
 if [ -n "$local_matches" ]; then
- echo "$local_matches" | head -1
- exit
+  echo "$local_matches" | head -1
+  exit
 fi
 
 dl_json="$(curl --retry 4 -s --fail 'https://golang.org/dl/?mode=json&include=all')"
 dl_versions="$(echo "$dl_json" | jq -r '.[].version' | sed 's/^go//g')"
+
+for v in $dl_versions; do
+  if [ "$v" = "$GO_VERSION_CONSTRAINT" ]; then
+    echo "$v"
+    exit
+  fi
+done
 
 echo "$dl_versions" | "$action_dir"/src/semver-select -c "$GO_VERSION_CONSTRAINT" -n 1 -i -
