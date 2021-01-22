@@ -10,6 +10,8 @@
 
 set -e
 
+CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
+
 if [ -z "$INSTALL_GO_VERSION" ]; then
   echo "INSTALL_GO_VERSION is required"
   exit 1
@@ -17,6 +19,8 @@ fi
 
 export GOROOT=""
 export GO111MODULE=off
+
+. src/lib
 
 homedir() {
   if [ "$(uname -s)" = "Windows" ]; then
@@ -28,23 +32,6 @@ homedir() {
 
 sdk_dir() {
   echo "$(homedir)/sdk"
-}
-
-goos() {
-  case "$RUNNER_OS" in
-  macOS)
-    echo "darwin"
-    ;;
-  Linux)
-    echo "linux"
-    ;;
-  Windows)
-    echo "windows"
-    ;;
-  *)
-    uname -s | tr '[:upper:]' '[:lower:]'
-    ;;
-  esac
 }
 
 extension() {
