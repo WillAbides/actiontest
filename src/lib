@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
+
+goos() {
+  case "$RUNNER_OS" in
+  macOS)
+    echo "darwin"
+    ;;
+  Linux)
+    echo "linux"
+    ;;
+  Windows)
+    echo "windows"
+    ;;
+  *)
+    uname -s | tr '[:upper:]' '[:lower:]'
+    ;;
+  esac
+}
