@@ -100,6 +100,12 @@ install_go() {
   cd -
 }
 
+exe_name() {
+  suffix=""
+  [ "$(goos)" = "windows" ] && suffix=".exe"
+  echo "$1$suffix"
+}
+
 target_dir="$INSTALL_GO_TARGET_DIR"
 [ -n "$target_dir" ] || target_dir="$INSTALL_GO_TOOL_CACHE/go/$INSTALL_GO_VERSION/x64"
 
@@ -127,7 +133,8 @@ echo "GOROOT=" >>"$GITHUB_ENV"
 
 if [ -n "$INSTALL_GO_TIP" ]; then
   GO111MODULE=off go get golang.org/dl/gotip
-  gotip download
+  "$(exe_name gotip)" download
+  mv "$gopath/bin/$(exe_name gotip)" "$gopath/bin/$(exe_name go)"
 fi
 
 govars='GOCACHE
