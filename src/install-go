@@ -3,22 +3,15 @@
 # required global vars:
 # INSTALL_GO_VERSION=1.2.3  # the version of go to install
 # RUNNER_OS                 # provided by action
-# INSTALL_GO_TOOL_CACHE     # runner.tool_cache
+# RUNNER_TOOL_CACHE         # provided by action
 #
 # optional vars:
-# INSTALL_GO_TARGET_DIR="~/sdk/go$INSTALL_GO_VERSION"  # where to install
 # INSTALL_GO_FORCE                                     # set to non-empty to force the install
-# INSTALL_GO_TMP_BASE=$RUNNER_TEMP                     # temp dir base for downloading and extracting
 
-set -ex
+set -e
 
 if [ -z "$INSTALL_GO_VERSION" ]; then
   echo "INSTALL_GO_VERSION is required"
-  exit 1
-fi
-
-if [ -z "$INSTALL_GO_TOOL_CACHE" ]; then
-  echo "INSTALL_GO_TOOL_CACHE is required"
   exit 1
 fi
 
@@ -68,7 +61,7 @@ version_archive_name() {
 }
 
 init_tmpdir() {
-  local tmpdir="${INSTALL_GO_TMP_BASE:-"$RUNNER_TEMP"}"
+  local tmpdir="$RUNNER_TEMP"
   tmpdir="${tmpdir:-"$TMPDIR"}"
   tmpdir="$tmpdir/install-go"
   mkdir -p "$tmpdir"
@@ -106,10 +99,9 @@ exe_name() {
   echo "$1$suffix"
 }
 
-target_dir="$INSTALL_GO_TARGET_DIR"
-[ -n "$target_dir" ] || target_dir="$INSTALL_GO_TOOL_CACHE/go/$INSTALL_GO_VERSION/x64"
+target_dir="$RUNNER_TOOL_CACHE/go/$INSTALL_GO_VERSION/x64"
 
-tip_target_dir="$INSTALL_GO_TOOL_CACHE/go/tip/x64"
+tip_target_dir="$RUNNER_TOOL_CACHE/go/tip/x64"
 
 if [ -d "$target_dir" ]; then
   echo "$target_dir" already exists

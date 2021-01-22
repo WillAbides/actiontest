@@ -5,10 +5,6 @@ inputs:
     required: true
     description: |
       The version of go to install. It can be an exact version or a semver constraint like '1.14' or '^1.14.4'
-  install-dir:
-    required: false
-    description: |
-      Where to install go. Default: <tool_cache>/go/<go-version>/x64
 outputs:
   GOCACHE:
     description: go env GOCACHE
@@ -45,7 +41,4 @@ runs:
         echo "INSTALL_GO_VERSION=$got" >> "$GITHUB_ENV"
     - id: install-go
       shell: bash
-      env:
-        INSTALL_GO_TOOL_CACHE: ${{ runner.tool_cache }}
-        INSTALL_GO_TARGET_DIR: ${{ inputs.install-dir }}
       run: src/install-go
