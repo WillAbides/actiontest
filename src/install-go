@@ -10,7 +10,7 @@
 # INSTALL_GO_FORCE                                     # set to non-empty to force the install
 # INSTALL_GO_TMP_BASE=$RUNNER_TEMP                     # temp dir base for downloading and extracting
 
-set -e
+set -ex
 
 if [ -z "$INSTALL_GO_VERSION" ]; then
   echo "INSTALL_GO_VERSION is required"
