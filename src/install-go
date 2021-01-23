@@ -2,7 +2,6 @@
 
 # required global vars:
 # INSTALL_GO_VERSION=1.2.3  # the version of go to install
-# RUNNER_OS                 # provided by action
 # RUNNER_TOOL_CACHE         # provided by action
 #
 # optional vars:
