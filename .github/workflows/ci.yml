@@ -43,8 +43,8 @@ jobs:
       - uses: WillAbides/setup-go-faster@main
         id: setgo
         with:
-          go-version: "^1"
-          ignore-local: true
+          go-version: '^1'
+          ignore-local: false
       - env:
           outs: ${{ toJson(steps.setgo.outputs) }}
         run: |
