@@ -11,6 +11,8 @@ jobs:
 #          - ubuntu-latest
 #          - ubuntu-latest
 #          - ubuntu-latest
+        go_version:
+          - 1.15.1
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -21,12 +23,12 @@ jobs:
       - name: cleanup
         run: |
           rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
-          rm -rf "$RUNNER_TOOL_CACHE/go/*"
+          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
           ls -haltr "$RUNNER_TOOL_CACHE/go"
           env
       - uses: actions/setup-go@v2
         with:
-          go-version: 1.15.1
+          go-version: ${{ matrix.go_version }}
       - run: |
           which go
           go version
@@ -34,7 +36,7 @@ jobs:
       - name: cleanup
         run: |
           rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
-          rm -rf "$RUNNER_TOOL_CACHE/go/*"
+          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
           ls -haltr "$RUNNER_TOOL_CACHE/go"
           env
       - run: |
@@ -43,62 +45,8 @@ jobs:
           go env
       - uses: WillAbides/setup-go-faster@winzip
         with:
-          go-version: 1.15.1
+          go-version: ${{ matrix.go_version }}
       - run: |
           which go
           go version
           go env
-#      - name: cleanup
-#        run: |
-#          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
-#          rm -rf "$RUNNER_TOOL_CACHE/go/1.15.1"
-#      - uses: actions/setup-go@v2
-#        with:
-#          go-version: 1.15.1
-#      - run: go version
-#      - name: cleanup
-#        run: |
-#          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
-#          rm -rf "$RUNNER_TOOL_CACHE/go/1.15.1"
-#      - uses: WillAbides/setup-go-faster@winzip
-#        with:
-#          go-version: 1.15.1
-#      - run: go version
-
-#      - run: mkdir -p "$RUNNER_WORKSPACE/tmpgo"
-#      - name: curl
-#        run: |
-#          cd "$RUNNER_WORKSPACE/tmpgo"
-#          time curl -L -o go.zip https://golang.org/dl/go1.15.7.windows-amd64.zip
-#      - name: 7z
-#        run: |
-#          cd "$RUNNER_WORKSPACE/tmpgo"
-#          time 7z x go.zip
-#      - name: rm
-#        run: |
-#          cd "$RUNNER_WORKSPACE/tmpgo"
-#          rm -rf go
-#      - name: unzip
-#        run: |
-#          cd "$RUNNER_WORKSPACE/tmpgo"
-#          time unzip -q go.zip
-#      - name: rm
-#        run: |
-#          cd "$RUNNER_WORKSPACE/tmpgo"
-#          rm -rf go
-#      - name: 7z
-#        run: |
-#          cd "$RUNNER_WORKSPACE/tmpgo"
-#          time 7z x go.zip
-#      - name: rm
-#        run: |
-#          cd "$RUNNER_WORKSPACE/tmpgo"
-#          rm -rf go
-#      - name: unzip
-#        run: |
-#          cd "$RUNNER_WORKSPACE/tmpgo"
-#          time unzip -q go.zip
-#      - name: rm
-#        run: |
-#          cd "$RUNNER_WORKSPACE/tmpgo"
-#          rm -rf go
