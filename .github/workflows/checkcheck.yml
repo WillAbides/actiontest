@@ -14,11 +14,12 @@ jobs:
         shell: bash
     steps:
       - run: df -h
-      - run: find / -type d -maxdepth 4
+      - run: find / -type d -maxdepth 1
+      - run: find / -type d -maxdepth 2
       - run: env
-      - uses: WillAbides/setup-go-faster@winzip
-        with:
-          go-version: 1.15.1
+#      - uses: WillAbides/setup-go-faster@winzip
+#        with:
+#          go-version: 1.15.1
 
 #      - name: curl
 #        run: |
