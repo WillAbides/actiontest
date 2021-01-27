@@ -14,44 +14,44 @@ jobs:
         shell: bash
     steps:
       - run: env
-#      - uses: WillAbides/setup-go-faster@winzip
-#        with:
-#          go-version: 1.15.1
-#      - run: go version
-      - run: mkdir -p "$RUNNER_WORKSPACE/tmpgo"
-      - name: curl
-        run: |
-          cd "$RUNNER_WORKSPACE/tmpgo"
-          time curl -L -o go.zip https://golang.org/dl/go1.15.7.windows-amd64.zip
-      - name: 7z
-        run: |
-          cd "$RUNNER_WORKSPACE/tmpgo"
-          time 7z x go.zip
-      - name: rm
-        run: |
-          cd "$RUNNER_WORKSPACE/tmpgo"
-          rm -rf go
-      - name: unzip
-        run: |
-          cd "$RUNNER_WORKSPACE/tmpgo"
-          time unzip -q go.zip
-      - name: rm
-        run: |
-          cd "$RUNNER_WORKSPACE/tmpgo"
-          rm -rf go
-      - name: 7z
-        run: |
-          cd "$RUNNER_WORKSPACE/tmpgo"
-          time 7z x go.zip
-      - name: rm
-        run: |
-          cd "$RUNNER_WORKSPACE/tmpgo"
-          rm -rf go
-      - name: unzip
-        run: |
-          cd "$RUNNER_WORKSPACE/tmpgo"
-          time unzip -q go.zip
-      - name: rm
-        run: |
-          cd "$RUNNER_WORKSPACE/tmpgo"
-          rm -rf go
+      - uses: WillAbides/setup-go-faster@winzip
+        with:
+          go-version: 1.15.1
+      - run: go version
+#      - run: mkdir -p "$RUNNER_WORKSPACE/tmpgo"
+#      - name: curl
+#        run: |
+#          cd "$RUNNER_WORKSPACE/tmpgo"
+#          time curl -L -o go.zip https://golang.org/dl/go1.15.7.windows-amd64.zip
+#      - name: 7z
+#        run: |
+#          cd "$RUNNER_WORKSPACE/tmpgo"
+#          time 7z x go.zip
+#      - name: rm
+#        run: |
+#          cd "$RUNNER_WORKSPACE/tmpgo"
+#          rm -rf go
+#      - name: unzip
+#        run: |
+#          cd "$RUNNER_WORKSPACE/tmpgo"
+#          time unzip -q go.zip
+#      - name: rm
+#        run: |
+#          cd "$RUNNER_WORKSPACE/tmpgo"
+#          rm -rf go
+#      - name: 7z
+#        run: |
+#          cd "$RUNNER_WORKSPACE/tmpgo"
+#          time 7z x go.zip
+#      - name: rm
+#        run: |
+#          cd "$RUNNER_WORKSPACE/tmpgo"
+#          rm -rf go
+#      - name: unzip
+#        run: |
+#          cd "$RUNNER_WORKSPACE/tmpgo"
+#          time unzip -q go.zip
+#      - name: rm
+#        run: |
+#          cd "$RUNNER_WORKSPACE/tmpgo"
+#          rm -rf go
