@@ -15,19 +15,23 @@ jobs:
     steps:
       - run: df -h
       - run: env
-      - name: curl
-        run: |
-          cd "$HOME"
-          time curl -L -o go.zip https://golang.org/dl/go1.15.7.windows-amd64.zip
-      - name: 7z
-        run: |
-          cd "$HOME"
-          time 7z x go.zip
-      - name: rm
-        run: |
-          cd "$HOME"
-          rm -rf go
-      - name: unzip
-        run: |
-          cd "$HOME"
-          time unzip -q go.zip
+      - uses: WillAbides/setup-go-faster@winzip
+        with:
+          go-version: 1.15.7
+
+#      - name: curl
+#        run: |
+#          cd "$HOME"
+#          time curl -L -o go.zip https://golang.org/dl/go1.15.7.windows-amd64.zip
+#      - name: 7z
+#        run: |
+#          cd "$HOME"
+#          time 7z x go.zip
+#      - name: rm
+#        run: |
+#          cd "$HOME"
+#          rm -rf go
+#      - name: unzip
+#        run: |
+#          cd "$HOME"
+#          time unzip -q go.zip
