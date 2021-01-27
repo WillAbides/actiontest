@@ -14,13 +14,14 @@ jobs:
       run:
         shell: bash
     steps:
+      - uses: actions/checkout@v2
       - name: cleanup
         run: |
           rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
           rm -rf "$RUNNER_TOOL_CACHE/go/*"
       - uses: WillAbides/setup-go-faster@main
         with:
-          go-version: 1.15.2
+          go-version: 1.15.1
       - run: go version
       - name: cleanup
         run: |
