@@ -7,10 +7,10 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-#          - ubuntu-latest
-#          - ubuntu-latest
-#          - ubuntu-latest
-#          - ubuntu-latest
+          - ubuntu-latest
+          - ubuntu-latest
+          - ubuntu-latest
+          - ubuntu-latest
         go_version:
           - 1.15.1
     runs-on: ${{ matrix.os }}
@@ -25,7 +25,6 @@ jobs:
           rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
           rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
           ls -haltr "$RUNNER_TOOL_CACHE/go"
-          env
       - uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go_version }}
