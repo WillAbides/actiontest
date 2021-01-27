@@ -16,6 +16,8 @@ jobs:
       - run: df -h
       - run: find / -type d -maxdepth 1
       - run: find / -type d -maxdepth 2
+      - run: find /d/ -type d -maxdepth 2
+        if: ${{ runner.os == 'Windows' }}
       - run: env
 #      - uses: WillAbides/setup-go-faster@winzip
 #        with:
