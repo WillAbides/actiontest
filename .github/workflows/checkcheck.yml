@@ -6,13 +6,30 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-18.04
-          - windows-2019
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
     runs-on: ${{ matrix.os }}
     defaults:
       run:
         shell: bash
     steps:
+      - name: cleanup
+        run: |
+          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
+          rm -rf "$RUNNER_TOOL_CACHE/go/1.15.1"
+      - uses: WillAbides/setup-go-faster@winzip
+        with:
+          go-version: 1.15.1
+      - run: go version
+      - name: cleanup
+        run: |
+          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
+          rm -rf "$RUNNER_TOOL_CACHE/go/1.15.1"
+      - uses: actions/setup-go@v2
+        with:
+          go-version: 1.15.1
+      - run: go version
       - name: cleanup
         run: |
           rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
