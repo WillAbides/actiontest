@@ -17,6 +17,9 @@ jobs:
       - run: find /d/ -type d -maxdepth 4
         if: ${{ runner.os == 'Windows' }}
       - run: env
+      - uses: actions/checkout@v2
+      - run: ls -haltr
+      - run: pwd
 #      - uses: WillAbides/setup-go-faster@winzip
 #        with:
 #          go-version: 1.15.1
