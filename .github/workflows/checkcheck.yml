@@ -13,25 +13,21 @@ jobs:
       run:
         shell: bash
     steps:
-      - name: inspection
-        run: |
-          set -x
-          df -h
-          pwd
-          env
+      - run: df -h
+      - run: env
       - name: curl
-        run: time curl -L -o go.zip https://golang.org/dl/go1.15.7.windows-amd64.zip
+        run: |
+          cd "$HOME"
+          time curl -L -o go.zip https://golang.org/dl/go1.15.7.windows-amd64.zip
       - name: 7z
-        run: time 7z x go.zip
+        run: |
+          cd "$HOME"
+          time 7z x go.zip
       - name: rm
-        run: rm -rf go
+        run: |
+          cd "$HOME"
+          rm -rf go
       - name: unzip
-        run: time unzip -q go.zip
-      - name: rm
-        run: rm -rf go
-      - name: 7z
-        run: time 7z x go.zip
-      - name: rm
-        run: rm -rf go
-      - name: unzip
-        run: time unzip -q go.zip
+        run: |
+          cd "$HOME"
+          time unzip -q go.zip
