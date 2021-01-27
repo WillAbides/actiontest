@@ -7,10 +7,10 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - ubuntu-latest
-          - ubuntu-latest
-          - ubuntu-latest
-          - ubuntu-latest
+#          - ubuntu-latest
+#          - ubuntu-latest
+#          - ubuntu-latest
+#          - ubuntu-latest
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -27,6 +27,7 @@ jobs:
         with:
           go-version: 1.15.1
       - run: |
+          which go
           go version
           go env
       - name: cleanup
@@ -34,10 +35,15 @@ jobs:
           rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
           rm -rf "$RUNNER_TOOL_CACHE/go/*"
           ls -haltr "$RUNNER_TOOL_CACHE/go"
+      - run: |
+          which go
+          go version
+          go env
       - uses: WillAbides/setup-go-faster@winzip
         with:
           go-version: 1.15.1
       - run: |
+          which go
           go version
           go env
 #      - name: cleanup
