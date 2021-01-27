@@ -6,23 +6,17 @@ jobs:
       fail-fast: false
       matrix:
         os:
-#          - ubuntu-18.04
+          - ubuntu-18.04
           - windows-2019
     runs-on: ${{ matrix.os }}
     defaults:
       run:
         shell: bash
     steps:
-      - run: df -h
-      - run: find /d/ -type d -maxdepth 4
-        if: ${{ runner.os == 'Windows' }}
       - run: env
-      - uses: actions/checkout@v2
-      - run: ls -haltr
-      - run: pwd
-#      - uses: WillAbides/setup-go-faster@winzip
-#        with:
-#          go-version: 1.15.1
+      - uses: WillAbides/setup-go-faster@winzip
+        with:
+          go-version: 1.15.1
 
 #      - name: curl
 #        run: |
