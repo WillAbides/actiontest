@@ -2,7 +2,13 @@ name: checkcheck
 on: [ push, pull_request, workflow_dispatch ]
 jobs:
   unzip:
-    runs-on: windows-2019
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-18.04
+          - windows-2019
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         shell: bash
