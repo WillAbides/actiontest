@@ -6,18 +6,9 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - macos-latest
-          - macos-latest
-          - macos-latest
-          - macos-latest
-          - macos-latest
-          - macos-latest
-          - macos-latest
-          - macos-latest
-          - macos-latest
-          - macos-latest
+          - ubuntu-latest
         go_version:
-          - 1.15.1
+          - tip
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -31,7 +22,7 @@ jobs:
           rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
           rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
           ls -haltr "$RUNNER_TOOL_CACHE/go"
-      - uses: WillAbides/setup-go-faster@winzip
+      - uses: WillAbides/setup-go-faster@main
         with:
           go-version: ${{ matrix.go_version }}
       - run: |
