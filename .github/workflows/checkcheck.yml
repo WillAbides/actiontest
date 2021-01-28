@@ -22,7 +22,7 @@ jobs:
           - macos-latest
           - macos-latest
         go_version:
-          - tip
+          - 1.15.x
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -31,11 +31,11 @@ jobs:
       - run: df -h
       - uses: actions/checkout@v2
 
-      - name: cleanup
-        run: |
-          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
-          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
-          ls -haltr "$RUNNER_TOOL_CACHE/go"
+#      - name: cleanup
+#        run: |
+#          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
+#          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
+#          ls -haltr "$RUNNER_TOOL_CACHE/go"
       - uses: WillAbides/setup-go-faster@main
         with:
           go-version: ${{ matrix.go_version }}
@@ -43,11 +43,11 @@ jobs:
           which go
           go version
 
-      - name: cleanup
-        run: |
-          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
-          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
-          ls -haltr "$RUNNER_TOOL_CACHE/go"
+#      - name: cleanup
+#        run: |
+#          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
+#          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
+#          ls -haltr "$RUNNER_TOOL_CACHE/go"
       - uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go_version }}
