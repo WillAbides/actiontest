@@ -6,16 +6,16 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - windows-latest
-          - windows-latest
-          - windows-latest
-          - windows-latest
-          - windows-latest
-          - windows-latest
-          - windows-latest
-          - windows-latest
-          - windows-latest
-          - windows-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
         go_version:
           - 1.15.1
     runs-on: ${{ matrix.os }}
