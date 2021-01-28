@@ -6,11 +6,16 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-latest
-          - ubuntu-latest
-          - ubuntu-latest
-          - ubuntu-latest
-          - ubuntu-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
         go_version:
           - 1.15.1
     runs-on: ${{ matrix.os }}
