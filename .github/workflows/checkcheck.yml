@@ -6,7 +6,21 @@ jobs:
       fail-fast: false
       matrix:
         os:
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
           - ubuntu-latest
+          - ubuntu-latest
+          - ubuntu-latest
+          - ubuntu-latest
+          - ubuntu-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
         go_version:
           - tip
     runs-on: ${{ matrix.os }}
