@@ -30,20 +30,19 @@ jobs:
           rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
           rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
           ls -haltr "$RUNNER_TOOL_CACHE/go"
-      - uses: WillAbides/setup-go-faster@winzip
+      - uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go_version }}
       - run: |
           which go
           go version
 
-
       - name: cleanup
         run: |
           rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
           rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
           ls -haltr "$RUNNER_TOOL_CACHE/go"
-      - uses: actions/setup-go@v2
+      - uses: WillAbides/setup-go-faster@winzip
         with:
           go-version: ${{ matrix.go_version }}
       - run: |
