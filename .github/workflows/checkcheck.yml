@@ -22,7 +22,7 @@ jobs:
 #          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
 #          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
 #          ls -haltr "$RUNNER_TOOL_CACHE/go"
-      - uses: WillAbides/setup-go-faster@v1
+      - uses: WillAbides/setup-go-faster@v1.1.1
         with:
           go-version: ${{ matrix.go_version }}
       - run: |
