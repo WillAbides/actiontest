@@ -7,8 +7,22 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
+          - ubuntu-latest
+          - ubuntu-latest
+          - ubuntu-latest
+          - ubuntu-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - macos-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
+          - windows-latest
         go_version:
-          - 1.16rc1
+          - 1.15.1
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -17,26 +31,26 @@ jobs:
       - run: df -h
       - uses: actions/checkout@v2
 
-#      - name: cleanup
-#        run: |
-#          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
-#          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
-#          ls -haltr "$RUNNER_TOOL_CACHE/go"
-      - uses: WillAbides/setup-go-faster@v1.3.0
+      - name: cleanup
+        run: |
+          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
+          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
+          ls -haltr "$RUNNER_TOOL_CACHE/go"
+      - uses: WillAbides/setup-go-faster@azfunc
         with:
           go-version: ${{ matrix.go_version }}
       - run: |
           which go
           go version
 
-##      - name: cleanup
-##        run: |
-##          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
-##          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
-##          ls -haltr "$RUNNER_TOOL_CACHE/go"
-#      - uses: actions/setup-go@v2
-#        with:
-#          go-version: ${{ matrix.go_version }}
-#      - run: |
-#          which go
-#          go version
+      - name: cleanup
+        run: |
+          rm -rf "$RUNNER_WORKSPACE/setup-go-faster"
+          rm -rf "$RUNNER_TOOL_CACHE/go/${{ matrix.go_version }}"
+          ls -haltr "$RUNNER_TOOL_CACHE/go"
+      - uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go_version }}
+      - run: |
+          which go
+          go version
