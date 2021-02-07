@@ -4,7 +4,7 @@ inputs:
   cache-prefix:
     description: prefix for cache indices
     required: true
-  "abc":
+  "abc*":
     description: abc
     required: false
 runs:
