@@ -10,4 +10,5 @@ jobs:
       - uses: ./.github/actions/helloworld
         with:
           cache-prefix: omg
-          abc: bar
+          abc: def
+          abcd: efgh
