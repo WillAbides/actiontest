@@ -4,6 +4,9 @@ inputs:
   cache-prefix:
     description: prefix for cache indices
     required: true
+  "abc":
+    description: abc
+    required: false
 runs:
   using: "composite"
   steps:
@@ -12,6 +15,6 @@ runs:
     - name: Dump job context
       shell: sh
       run: echo cache-prefix:${{ inputs.cache-prefix }}
-    - name: Dump foo
+    - name: Dump abc
       shell: bash
-      run: echo foo:${{ inputs.foo }}
+      run: echo foo:${{ inputs.abc }}
