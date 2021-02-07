@@ -12,3 +12,6 @@ runs:
     - name: Dump job context
       shell: sh
       run: echo cache-prefix:${{ inputs.cache-prefix }}
+    - name: Dump foo
+      shell: bash
+      run: echo foo:${{ inputs.foo }}

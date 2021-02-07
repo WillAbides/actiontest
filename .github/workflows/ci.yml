@@ -10,3 +10,4 @@ jobs:
       - uses: ./.github/actions/helloworld
         with:
           cache-prefix: omg
+          foo: bar
